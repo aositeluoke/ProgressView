@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ProgressView">
-        <attr name="out_width" format="reference|dimension" />
+        <attr name="decorator_width" format="reference|dimension" />
         <attr name="cur_pro" format="float" />
         <attr name="total_pro" format="float" />
         <attr name="pro_color" format="reference|color" />
-        <attr name="out_ring_color" format="reference|color" />
+        <attr name="decorator_color" format="reference|color" />
         <attr name="text_color" format="reference|color" />
         <attr name="text_size" format="dimension" />
     </declare-styleable>

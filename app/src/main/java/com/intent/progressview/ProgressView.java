@@ -81,10 +81,10 @@ public class ProgressView extends View {
      */
     private void initAttr(Context context, @Nullable AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ProgressView, 0, 0);
-        mDecoratorWidth = a.getDimension(R.styleable.ProgressView_out_width, mDecoratorWidth);
+        mDecoratorWidth = a.getDimension(R.styleable.ProgressView_decorator_width, mDecoratorWidth);
         mCurPro = a.getFloat(R.styleable.ProgressView_cur_pro, mCurPro);
         mTotalPro = a.getFloat(R.styleable.ProgressView_total_pro, mTotalPro);
-        mDecoratorColor = a.getColor(R.styleable.ProgressView_out_ring_color, mDecoratorColor);
+        mDecoratorColor = a.getColor(R.styleable.ProgressView_decorator_color, mDecoratorColor);
         mProColor = a.getColor(R.styleable.ProgressView_pro_color, mProColor);
         mTextColor = a.getColor(R.styleable.ProgressView_text_color, mTextColor);
         mTextSize = a.getDimension(R.styleable.ProgressView_text_size, mTextSize);
@@ -145,7 +145,10 @@ public class ProgressView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRoundRect(mDecoratorRect, mDecoratorRect.height() / 2, mDecoratorRect.height() / 2, mDecoratorPaint);
+        canvas.drawRoundRect(mDecoratorRect,
+                mDecoratorRect.height() / 2,
+                mDecoratorRect.height() / 2,
+                mDecoratorPaint);
         drawClipAreaAndProArea(canvas);
         drawText(canvas);
     }
@@ -174,6 +177,7 @@ public class ProgressView extends View {
         BigDecimal percent = new BigDecimal(mCurPro * 100).divide(new BigDecimal(mTotalPro), 0, BigDecimal.ROUND_FLOOR);
         String mTextStr = percent + "%";
         mTextPaint.getTextBounds(mTextStr, 0, mTextStr.length(), mTextRect);
+        /*进度条区域宽度大于文本区域宽度才可绘制*/
         if (mProgressRect.width() > mTextRect.width() + 10) {
             float max = mProgressRect.width() + mDecoratorWidth - 10;
             baseX = max - mTextRect.width();
